@@ -44,7 +44,6 @@ app.get('/I/want/title/', function (req, res) {
     let start = Date.now();
     //wait time for 1 ms
     const minWaitTime = 1000;
-    
     return httpRequest(options).then(handler(start, minWaitTime), handler(start, minWaitTime, true));
   }
   function httpRequest(params, postData) {
@@ -88,60 +87,39 @@ app.get('/I/want/title/', function (req, res) {
       req.end();
     });
   }
-
   function CheckForTLD_regularExpression(url) {
     var dn = new Array();
-    //console.log((url));
-
     //extraction of domain names using regexpressions  //https://stackoverflow.com/a/16491074/5588821
     const regex = "^(?!\-)(?:(?:[a-zA-Z\d][a-zA-Z\d\-]{0,61})?[a-zA-Z\d]\.){1,126}(?!\d+)[a-zA-Z\d]{1,63}$";
-
     if (Array.isArray(url)) {
       if (url.length > 1) {
         for (var i = 0; i < url.length; i++) {
           dn.push(url[i].match(regex)[0])
         }
-
       }
       else dn.push(url[0][0]);
-
     }
-
-
     else {
       address = String(url)
       dn.push(address.match(regex));
-
     }
     return dn;
   }
-
   function domainNameExtractionREGEX(url) {
     var dn = new Array();
-    // console.log(url);
-    // console.log(url.length);
     //extraction of domain names using regexpressions
     const regex2 = "^(?:.*://)?(?:www\.)?([^:/]*).*$";
-
     if (Array.isArray(url)) {
-
       for (var i = 0; i < url.length; i++) {
-
         dn.push(url[i].match(regex2)[1]);
-
       }
-
     }
     else {
       address = String(url)
       dn.push(address.match(regex2));
-
     }
-
     return dn;
-
   }
-
   function sleep(ms) {
     return new Promise(resolve => {
       setTimeout(resolve, ms);
@@ -163,7 +141,6 @@ app.get('/I/want/title/', function (req, res) {
   }
   //rendering html with view engine as ejs
   setTimeout(() => {
-
       let html = ejs.render('<html><title>html file sent</title><head></head><body><h1> Following are the titles of given websites: </h1><ul>'+Titlewithhtml+'</ul></body></html>', {titles}); 
           res.write(html);  
           res.end();  
