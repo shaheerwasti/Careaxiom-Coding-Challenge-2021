@@ -8,9 +8,9 @@ const port = process.env.PORT || 3000;
 app.get('/I/want/title/', function (req, res) {
   //GET Addresses from url as addresses
   var addresses = req.query.address;
- //Title inside <li> tags are 
+  //Title inside <li> tags are 
   var Titlewithhtml = '';
- //titles arrary 
+  //titles arrary 
   var titles = new Array();
   //first function
   var domainNames = domainNameExtractionREGEX(addresses);
@@ -33,10 +33,10 @@ app.get('/I/want/title/', function (req, res) {
     //initiating the man function
     main(options)
       .then((data1) => {
-        titles.push(data1); Titlewithhtml = Titlewithhtml+'<li>'+data1+'</li>';
-      console.log(Titlewithhtml);  
+        titles.push(data1); Titlewithhtml = Titlewithhtml + '<li>' + data1 + '</li>';
+        console.log(Titlewithhtml);
       })
-      .catch(error => Titlewithhtml = Titlewithhtml+'<li>'+ error['hostname']+': No Response </li>')
+      .catch(error => Titlewithhtml = Titlewithhtml + '<li>' + error['hostname'] + ': No Response </li>')
   }
   //this is the main function
   function main(options) {
@@ -141,9 +141,9 @@ app.get('/I/want/title/', function (req, res) {
   }
   //rendering html with view engine as ejs
   setTimeout(() => {
-      let html = ejs.render('<html><title>html file sent</title><head></head><body><h1> Following are the titles of given websites: </h1><ul>'+Titlewithhtml+'</ul></body></html>', {titles}); 
-          res.write(html);  
-          res.end();  
+    let html = ejs.render('<html><title>html file sent</title><head></head><body><h1> Following are the titles of given websites: </h1><ul>' + Titlewithhtml + '</ul></body></html>', { titles });
+    res.write(html);
+    res.end();
   }, 3000);
 });
 
