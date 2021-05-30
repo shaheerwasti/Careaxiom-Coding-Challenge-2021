@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/shaheerwasti/care-axiom-test"
+    "url": "https://github.com/shaheerwasti/Careaxiom-Coding-Challenge-2021"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/shaheerwasti/care-axiom-test/issues"
+    "url": "https://github.com/shaheerwasti/Careaxiom-Coding-Challenge-2021/issues"
   },
-  "homepage": "https://github.com/shaheerwasti/care-axiom-test#readme",
+  "homepage": "https://github.com/shaheerwasti/Careaxiom-Coding-Challenge-2021#readme",
   "dependencies": {
     "async": "^3.2.0",
     "ejs": "^3.1.6"
