@@ -1,28 +1,21 @@
 const https = require('https');
 const express = require('express');
-const fs = require('fs');
 var async = require("async");
-const request = require('request');
 let ejs = require('ejs');
 const util = require('util');
 const app = express();
 const port = process.env.PORT || 3000;
-
-
-
 app.get('/I/want/title/', function (req, res) {
   //GET Addresses from url as addresses
   var addresses = req.query.address;
- //Title returns are pushed into titles
+ //Title inside <li> tags are 
   var Titlewithhtml = '';
-  
+ //titles arrary 
   var titles = new Array();
-
   //first function
   var domainNames = domainNameExtractionREGEX(addresses);
   //second function
   domainNames = CheckForTLD_regularExpression(domainNames)
-
   //reverse loop last domainName is processed first
   for (var l = domainNames.length - 1; l >= 0; l--) {
     //console.log(domainNames[l]);
@@ -42,26 +35,24 @@ app.get('/I/want/title/', function (req, res) {
       .then((data1) => {
         titles.push(data1); Titlewithhtml = Titlewithhtml+'<li>'+data1+'</li>';
       console.log(Titlewithhtml);  
-      })//JSON.stringify(data1))
+      })
       .catch(error => Titlewithhtml = Titlewithhtml+'<li>'+ error['hostname']+': No Response </li>')
-        //console.log(error['hostname'])); //console.log(util.inspect( error, {showHidden: false, depth: null})))//Titlewithhtml = Titlewithhtml+'<li>'+ error.split(/:443No Response/i)[0]+'No Response </li>')//console.error('caught error!', error));
-
   }
-
-  //this is the main function responsible for promise handling and firing functions asynchronously
+  //this is the main function
   function main(options) {
     //now time
     let start = Date.now();
     //wait time for 1 ms
     const minWaitTime = 1000;
-
+    
     return httpRequest(options).then(handler(start, minWaitTime), handler(start, minWaitTime, true));
   }
   function httpRequest(params, postData) {
+    //promises are handled in handler
     return new Promise(function (resolve, reject) {
       var req = https.request(params, function (res) {
-        //console.log(res);
-        // reject on bad status
+        //for this challege res.statusCode > 301 otherwise its > 300
+        // reject on bad status 
         if (res.statusCode < 200 || res.statusCode > 301) {
           return reject(new Error('statusCode=' + res.statusCode));
         }
@@ -74,18 +65,15 @@ app.get('/I/want/title/', function (req, res) {
         res.on('end', function () {
           var parsed = {};
           try {
-            //console.log(params.hostname);
             //title extression from body
             var TitleSpliting = body.split(/<\/title>/i)[0].split(/<title>/i)[1];
+            //passed contain the hostname : hostname title, if title is not present title is undefined
             parsed = params.hostname + " : " + TitleSpliting;
           }
           catch (er) {
             reject(er); //do nothing
           }
-          //   body = JSON.parse(Buffer.concat(body).toString());
-
           resolve(parsed);
-
         });
       });
       // reject on request error
@@ -173,30 +161,7 @@ app.get('/I/want/title/', function (req, res) {
       }
     }
   }
-
-  //options.agent = new https.Agent(options);
-  //console.log(titles);
-
-  // req = request("http://google.com", function (e, r, d) {});
-  // req.on('socket', function (socket) {
-  //     console.log("========\nRequest\n========")
-  //     console.log(JSON.stringify(socket._pendingData, null, 3));
-  //     console.log("========\nResponse\n========");
-  //     socket.on('data', function (data) { console.log(data.toString()); });
-  // });
-
-
-
-  // res.send(titles);
-  // setTimeout(() => {
-  //   //console.log(titles);
-  //   res.status(200).json({
-  //     status: 'succes',
-  //     data: JSON.stringify(titles),
-  //   })
-  //   res.end();
-  // }, 3000);
-  
+  //rendering html with view engine as ejs
   setTimeout(() => {
 
       let html = ejs.render('<html><title>html file sent</title><head></head><body><h1> Following are the titles of given websites: </h1><ul>'+Titlewithhtml+'</ul></body></html>', {titles}); 
