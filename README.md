@@ -1,8 +1,8 @@
-# Node Hello World
+# Node Axiom Care
 
-Simple node.js app that servers "hello world"
+Simple node.js app that returns titles of addresses passed in url
 
-Great for testing simple deployments to the cloud
+Great for learning async deployments to the cloud
 
 ## Run It
 
