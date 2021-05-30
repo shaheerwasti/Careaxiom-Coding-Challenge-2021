@@ -1,6 +1,6 @@
 # Node Axiom Care
 
-a node.js app that returns titles of addresses passed in url
+A node.js app that returns titles of addresses passed in url
 
 Great for learning async deployments to the cloud
 
