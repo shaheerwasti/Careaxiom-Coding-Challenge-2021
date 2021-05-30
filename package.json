@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/johnpapa/node-hello.git"
+    "url": "https://github.com/shaheerwasti/care-axiom-test"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/johnpapa/node-hello/issues"
+    "url": "https://github.com/shaheerwasti/care-axiom-test/issues"
   },
-  "homepage": "https://github.com/johnpapa/node-hello#readme",
+  "homepage": "https://github.com/shaheerwasti/care-axiom-test#readme",
   "dependencies": {
     "async": "^3.2.0",
     "ejs": "^3.1.6"
